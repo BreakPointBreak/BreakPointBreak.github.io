@@ -19,6 +19,7 @@ description: > # this means to ignore newlines until "baseurl:"
   BreakPoint Break Podcasts with Carl Mosca and Jonathan D'Andries
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://breakpointbreak.com" # the base hostname & protocol for your site, e.g. http://example.com
+show_downloads: true
 google_analytics: UA-92265929-1
 #twitter_username: jekyllrb
 #github_username:  jekyll
