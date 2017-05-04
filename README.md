@@ -8,10 +8,10 @@ References:
 - [ ] Add bumper music to podcasts
 - [ ] Write and record introduction and closing
 - [ ] Turn on LibSyn RSS feed for iTunes
-- [ ] Update website
- - [ ] Bios
- - [ ] Artwork
- - [ ] Show notes
+- [ ] Update website:
+  - [ ] Bios
+  - [ ] Artwork
+  - [ ] Show notes
 
 ## Initial Setup
 
