@@ -10,10 +10,7 @@ case "$OSTYPE" in
    darwin*)
       OPEN_BROWSER="open"
       ;;
-    msys*_)
-      OPEN_BROWSER="start"
-      ;;
-    win32*)
+    msys* | win32*)
       OPEN_BROWSER="start"
       ;;
 esac
@@ -21,8 +18,9 @@ MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then MY_DIR="$PWD"; fi
 
 docker-compose up -d
+CONTAINER_HOST=localhost
 CONTAINER_PORT=$(docker port jekyll-bpb 4000/tcp | sed 's/.*\://')
-CONTAINER_URL="http://localhost:$CONTAINER_PORT"
+CONTAINER_URL="http://$CONTAINER_HOST:$CONTAINER_PORT"
 
 i=0
 max_count=10
@@ -36,7 +34,8 @@ until $(curl --output /dev/null --silent --head --fail $CONTAINER_URL); do
   sleep 3
 done
 echo ""
-docker logs jekyll-bpb
+
 ( set -x;
   $OPEN_BROWSER $CONTAINER_URL
+  docker logs -f jekyll-bpb
 )

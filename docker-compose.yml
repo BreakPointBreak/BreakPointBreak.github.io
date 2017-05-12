@@ -7,6 +7,6 @@ services:
         container_name: jekyll-bpb
         restart: always
         volumes:
-          - ./jekyll:/srv/jekyll
+          - ./docs:/srv/jekyll
         ports:
           - "4000"
