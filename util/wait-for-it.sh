@@ -4,22 +4,6 @@
 
 cmdname=$(basename $0)
 
-
-( set -x;
-  cd $MY_DIR
-  docker-compose up -d
-)
-
-( set -x;
-  $MY_DIR/util/wait-for-it.sh $CONTAINER_HOST:$CONTAINER_PORT \
-    --timeout=60 \
-    --strict \
-    -- \
-    $OPEN_BROWSER $CONTAINER_URL
-
-  docker logs -f jekyll-bpb
-)
-
 echoerr() { if [[ $QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
 
 usage()
@@ -50,13 +34,14 @@ wait_for()
     while :
     do
         # (echo > /dev/tcp/$HOST/$PORT) >/dev/null 2>&1
-        # result=$?
-        result=$(curl --output /dev/null --silent --head --fail $HOST:$PORT)
+        curl --output /dev/null --silent --head --fail $HOST:$PORT
+        result=$?
         if [[ $result -eq 0 ]]; then
             end_ts=$(date +%s)
             echoerr "$cmdname: $HOST:$PORT is available after $((end_ts - start_ts)) seconds"
             break
         fi
+        echoerr -n "."
         sleep 1
     done
     return $result
